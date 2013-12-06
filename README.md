@@ -21,5 +21,5 @@ Important: Clear *.chat files from dlcache folder after or before running nexuiz
 Caution:
 i) give some time to download after u press K - some milliseconds
 ii) There are some obvious limitations since an web address is used as an input chat. For instance "+" cannot be typed instead would have to use %2B for that symbol.
-An easier way to do is to store %2B in some variable say _plus and whenever u want to type a+b type a$_plusb.
+
 
