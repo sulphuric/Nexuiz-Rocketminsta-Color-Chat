@@ -11,7 +11,7 @@ Create autoexec.cfg in Nexuiz/data under windows or $HOME/.Nexuiz/data under lin
 autoexec.cfg using the command exec /folder path/color_text.cfg. Or simply copy paste the code under color_text.cfg into autoexec.cfg.
 2. Setting up webserver:
 Download and install xampp.
-Place speak.pl in xampp/cgi-bin/ folder. Start xampp.
+Place speak.pl in xampp/cgi-bin/ folder. In speak.pl edit and complete the line #!"--SomePath--\xampp\perl\bin\perl.exe" with your own path. Start xampp.
 
 Usage:
 1.press L to type; then press K to upload /download; press O to say OR press P to team_say
