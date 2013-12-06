@@ -20,6 +20,6 @@ Important: Clear *.chat files from dlcache folder after or before running nexuiz
 
 Caution:
 i) give some time to download after u press K - some milliseconds
-ii) There are some obvious limitations since an web address is used as an input chat. For instance "+" cannot be processed, use %2B should be used.
+ii) There are some obvious limitations since an web address is used as an input chat. For instance "+" cannot be processed, instead %2B should be used.
 
 
