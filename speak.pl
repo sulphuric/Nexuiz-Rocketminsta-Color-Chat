@@ -6,16 +6,16 @@
     $ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/;
     if ($ENV{'REQUEST_METHOD'} eq "GET")
     {
-	$buffer = $ENV{'QUERY_STRING'};
+		$buffer = $ENV{'QUERY_STRING'};
     }
     # Split information into name/value pairs
     @pairs = split(/&/, $buffer);
     foreach $pair (@pairs)
     {
-	($name, $value) = split(/=/, $pair);
-	$value =~ tr/+/ /;
-	$value =~ s/%(..)/pack("C", hex($1))/eg;
-	$FORM{$name} = $value;
+		($name, $value) = split(/=/, $pair);
+		$value =~ tr/+/ /;
+		$value =~ s/%(..)/pack("C", hex($1))/eg;
+		$FORM{$name} = $value;
     }
     $say = $FORM{say};
 
@@ -287,7 +287,9 @@ sub TrimAlreadyExistingColorCodes{
 		elsif($color_code_position == 2 || $color_code_position == 3 || $color_code_position == 4 || $color_code_position == 5)
 		{
 		
-			if( (0 <= $temp_char && $temp_char <= 9 && looks_like_number($temp_char)) || $temp_char eq "A" || $temp_char eq "B" || $temp_char eq "C"|| $temp_char eq "D"|| $temp_char eq "E"|| $temp_char eq "F")
+			if( (0 <= $temp_char && $temp_char <= 9 && looks_like_number($temp_char)) || $temp_char eq "A" ||
+			$temp_char eq "B" || $temp_char eq "C"|| $temp_char eq "D"|| $temp_char eq "E"|| $temp_char eq "F"
+			|| $temp_char eq "a" || $temp_char eq "b" || $temp_char eq "c"|| $temp_char eq "d"|| $temp_char eq "e"|| $temp_char eq "f")
 			{
 				++$color_code_position;
 			}
