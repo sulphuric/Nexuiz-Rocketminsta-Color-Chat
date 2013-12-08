@@ -24,7 +24,7 @@ del data/dlcache/*.chat
 nexuiz.exe
 
 Caution:
-i) Give some time to download after u press K - mostly some milliseconds
+i) Allow some time to download after u press K - 1 sec or so.
 ii) There are some obvious limitations since an web address is used as an input chat. For instance the input "+" is lost during the web transaction, 
 instead %2B should be used.
 
