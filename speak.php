@@ -1,5 +1,6 @@
 
 <?php
+//created by NARKASUR aka H2SO4 on 2013/12/15
 header('Content-type: text/plain');
 
 $say = $_GET["say"];
@@ -16,9 +17,7 @@ print "\"";
 $space = 0;
 $trimmed_char = TrimAlreadyExistingColorCodes($say);
 
-#Debug
-#print "--- $trimmed_char--- ";
-#debug
+
 $prev_char = "x";//some garbage value other than $
 for($i = 0; $i <$length; ++$i)
 {
