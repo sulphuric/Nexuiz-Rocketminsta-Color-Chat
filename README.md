@@ -12,8 +12,11 @@ Create autoexec.cfg in Nexuiz/data under windows or $HOME/.Nexuiz/data under lin
 autoexec.cfg using the command exec /~folder path/color_text.cfg. Or simply copy paste the code under color_text.cfg into autoexec.cfg.
 2. Setting up the Webserver:
 Download and install xampp.
-Place speak.pl in xampp/cgi-bin/ folder. In speak.pl, edit and complete the line #!"--SomePath--\xampp\perl\bin\perl.exe" with your own path. Start xampp.
-
+Then follow step A or B
+A. Place speak.pl in xampp/cgi-bin/ folder. In speak.pl, edit and complete the line #!"--SomePath--\xampp\perl\bin\perl.exe" with your own path. Start xampp.
+OR
+B.Place speak.php in xampp/cgi-bin/ folder/. Edit color_text.cfg to place a # before alias colortext "curl http://localhost/cgi-bin/speak.pl?say=$send_var/$chat_count.chat"
+and remove the # from the line #alias colortext "curl http://localhost/speak.php?say=$send_var/$chat_count.chat"
 Usage:
 1. Press L to type, then press K to upload /download, press O to say to all OR press P to team_say.
 2. If you want input chat in console, type chat1 in console, then press K and then press O to say to all OR press P to team say.
@@ -24,7 +27,7 @@ del data/dlcache/*.chat
 nexuiz.exe
 
 Caution:
-i) Allow some time to download after u press K - 1 sec or so.
+i) Allow some time to download after u press K ( 1 sec or so.)
 ii) There are some obvious limitations since an web address is used as an input chat. For instance the input "+" is lost during the web transaction, 
 instead %2B should be used.
 
