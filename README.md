@@ -11,8 +11,8 @@ Setup:
 Create autoexec.cfg in Nexuiz/data under windows or $HOME/.Nexuiz/data under linux. Place color_text.cfg in a folder and call it from 
 autoexec.cfg using the command exec /~folder path/color_text.cfg. Or simply copy paste the code under color_text.cfg into autoexec.cfg.
 2. Setting up the Webserver:
-Download and install xampp.
-Then follow step A or B
+Download and install xampp(portable is good enough) or any other server that supports perl or php.
+Then follow step A or B:
 A. Place speak.pl in xampp/cgi-bin/ folder. In speak.pl, edit and complete the line #!"--SomePath--\xampp\perl\bin\perl.exe" with your own path. Start xampp.
 OR
 B.Place speak.php in xampp/cgi-bin/ folder/. Edit color_text.cfg to place a # before alias colortext "curl http://localhost/cgi-bin/speak.pl?say=$send_var/$chat_count.chat"
