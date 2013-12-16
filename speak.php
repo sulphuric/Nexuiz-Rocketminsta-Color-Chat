@@ -24,7 +24,6 @@ if($type == 1)
 elseif($type == 2)
 	print "say_team ";
 $color_count = 1;
-$color_type = 1;
 
 $char = "A";//some garbage character other than white space
 $trimmed_char = "";
@@ -46,7 +45,7 @@ for($i = 0; $i <$length; ++$i)
 	}
 	
 	if($space == 0) {
-		$color_count = colorify($color_count, $color_type);
+		$color_count = colorify($color_count);
 	}
 	else
 	{
@@ -158,18 +157,12 @@ function TrimAlreadyExistingColorCodes($say){
 	return $trimmed_char;
 }
 
-function colorify($color_count, $color_type)
+function colorify($color_count)
 {
 		switch ($color_count){
 			case 1 :
-				switch($color_type){
-					case 1:
-						print "^x700";
-						++$color_count;
-						break;
-					default:
-						break;
-				}
+					print "^x700";
+					++$color_count;
 					break;
 			case 2 :
 				print "^xA10";
