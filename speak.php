@@ -1,19 +1,37 @@
 
 <?php
-//created by NARKASUR aka H2SO4 on 2013/12/15
 header('Content-type: text/plain');
+
+if(empty($_GET ["say"]) || empty($_GET ["type"]))
+	return;
 
 $say = $_GET["say"];
 
+
+$possible_null_char = substr($say, 0,6);
+if(strcmp($possible_null_char, "--NULL") == 0)
+{
+	print "cprint ^1 No input; echo ^1 No input";
+	return;
+}
+
+
+
+
+$type = $_GET["type"];
+
+
 $length = strlen($say);
 
-	
-print "set speak_var ";
+if($type == 1)
+	print "say ";
+elseif($type == 2)
+	print "say_team ";
 $color_count = 1;
 
 $char = "A";//some garbage character other than white space
 $trimmed_char = "";
-print "\"";
+//print "\"";
 $space = 0;
 $trimmed_char = TrimAlreadyExistingColorCodes($say);
 
@@ -27,89 +45,77 @@ for($i = 0; $i <$length; ++$i)
 		$space = 1;
 	}
 	
-	if($space == 0) {
 	
-		if($color_count == 1 )
-		{
+	if($space == 0) {
+	//Add color
+	switch ($color_count){
+		case 1 :
 			print "^x700";
 			++$color_count;
-		}
-		elseif($color_count == 2 )
-		{
+			break;
+		case 2 :
 			print "^xA10";
 			++$color_count;
-		}
-		elseif($color_count == 3 )
-		{
+			break;
+		case 3 :
 			print "^xE20";
 			++$color_count;
-		}
-		elseif($color_count == 4 )
-		{
+			break;
+		case 4 :
 			print "^xF21";
 			++$color_count;
-		}
-		elseif($color_count == 5  ) 
-		{
+			break;
+		case 5  :
 			print "^xF33";
 			++$color_count;
-		}
-		elseif($color_count == 6 ) 
-		{
+			break;
+		case 6 :
 			print "^xF76";
 			++$color_count;
-		}
-		elseif($color_count == 7 ) 
-		{
+			break;
+		case 7 :
 			print "^xF77";
 			++$color_count;
-			
-		}
-		elseif($color_count == 8 )
-		{
+			break;
+		case 8 :
 			print "^xFAA";
 			++$color_count;
-		}
-		elseif($color_count == 9 )
-		{
+			break;
+		case 9 :
 			print "^xFEE";
 			++$color_count;
-		}
+			break;
 		#reverse color
-		elseif($color_count == 10 )#same as 8
-		{
+		case 10 :#same as 8
 			print "^xFAA";
 			++$color_count;
-		}
-		elseif($color_count == 11 )#same as 7
-		{
+			break;
+		case 11 :#same as 7
 			print "^xF77";
 			++$color_count;
-		}
-		elseif($color_count == 12 )#same as 6
-		{
+			break;
+		case 12 :#same as 6
 			print "^xF76";
 			++$color_count;
-		}
-		elseif($color_count == 13 )#same as 5
-		{
+			break;
+		case 13 :#same as 5
 			print "^xF33";
 			++$color_count;
-		}
-		elseif($color_count == 14 )#same as 4
-		{
+			break;
+		case 14 :#same as 4
 			print "^xF21";
 			++$color_count;
-		}
-		elseif($color_count == 15 )#same as 3
-		{
+			break;
+		case 15 :#same as 3
 			print "^xE20";
 			++$color_count;
-		}
-		elseif($color_count == 16 )#same as 2
-		{
+			break;
+		case 16 :#same as 2
 			print "^xA10";
 			$color_count = 1;
+			break;
+		default:
+			break;
 		}
 	}
 	else
@@ -119,10 +125,8 @@ for($i = 0; $i <$length; ++$i)
 		
 	if(strcmp($char, "\$") == 0)
 	{
-	
 		$prev_char="\$";
 		continue;
-	
 	}
 
 	if(strcmp($prev_char , "\$") == 0)
@@ -253,12 +257,7 @@ for($i = 0; $i <$length; ++$i)
 			break;
 	}
 	
-		
-	//° ± ² ³ ´ µ ¶ · ¸ ¹ 
 }
-
-print "\"";
-
 
 
 function TrimAlreadyExistingColorCodes($say){

@@ -1,5 +1,5 @@
 What is it?
-This is a script to chat in colorful fonts in Nexuiz/Rocketminsta. 
+This is a script to chat in colorful fonts in Nexuiz/Rocketminsta.
 
 Mechanism:
 Due to the limitations of quakec scripts an external program is called. The script uses curl to call an external web server 
@@ -11,24 +11,22 @@ Setup:
 Create autoexec.cfg in Nexuiz/data under windows or $HOME/.Nexuiz/data under linux. Place color_text.cfg in a folder and call it from 
 autoexec.cfg using the command exec /~folder path/color_text.cfg. Or simply copy paste the code under color_text.cfg into autoexec.cfg.
 2. Setting up the Webserver:
-Download and install xampp(portable is good enough) or any other server that supports perl or php.
-Then follow step A or B:
-A. Place speak.pl in xampp/cgi-bin/ folder. In speak.pl, edit and complete the line #!"--SomePath--\xampp\perl\bin\perl.exe" with your own path. Start xampp.
-OR
-B.Place speak.php in xampp/cgi-bin/ folder/. Edit color_text.cfg to place a # before alias colortext "curl http://localhost/cgi-bin/speak.pl?say=$send_var/$chat_count.chat"
-and remove the # from the line #alias colortext "curl http://localhost/speak.php?say=$send_var/$chat_count.chat"
+Download and install Apache or xampp(portable is good enough) server or any other server that supports php.
+Then, place speak.php in your server directory usually in htdocs folder under Apache or Xampp. 
 Usage:
-1. Press L to type, then press K to upload /download, press O to say to all OR press P to team_say.
-2. If you want input chat in console, type chat1 in console, then press K and then press O to say to all OR press P to team say.
-Important: Clear *.chat files from dlcache folder after or before running nexuiz. One good way is to run nexuiz is with a batch script which clears the chat
- and calls nexuiz client. E.g in windows the following batch script can be placed in nexuiz folder:
+1. Press O to input chat for public OR press P to input chat for team. Then press K to print chat.
+2. If you want input chat in console, use say1 command followed by your text for public chat or say2 command followed by your text for team chat .
+
+Important: 
+Clear *.chat files from dlcache folder before running nexuiz. One good way is to run nexuiz with a batch script which clears the chat files
+and calls nexuiz client. E.g in windows create a nexuiz.bat file inside nexuiz folder and add the following two lines to the file:
 
 del data/dlcache/*.chat
 nexuiz.exe
 
+Then every time you want to run nexuiz just run nexuiz.bat file.
 Caution:
-i) Allow some time to download after u press K ( 1 sec or so.)
-ii) There are some obvious limitations since an web address is used as an input chat. For instance the input "+" is lost during the web transaction, 
+i) There are some obvious limitations since an web address is used as an input chat. For instance the input "+" is lost during the web transaction, 
 instead %2B should be used.
 
 
