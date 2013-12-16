@@ -1,5 +1,6 @@
 
 <?php
+#created by NARKASUR aka H2SO4 on 2013/12/06
 header('Content-type: text/plain');
 
 if(empty($_GET ["say"]) || empty($_GET ["type"]))
