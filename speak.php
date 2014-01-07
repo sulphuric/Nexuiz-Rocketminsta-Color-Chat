@@ -1,51 +1,91 @@
 
 <?php
-#created by NARKASUR aka H2SO4 on 2013/12/06
+//color chat script support for Nexuiz/Rocketminsta
+//created by NARKASUR aka H2SO4 on 2013/12/06
 header('Content-type: text/plain');
 
-if(empty($_GET ["say"]) || empty($_GET ["type"]))
+if(!isset($_GET ["say"]) || !isset($_GET ["visibility"]) || !isset($_GET["type"]))
 	return;
-
 
 $say = $_GET["say"];
 
+$chat_type = -1; // random or what
+$chat_type = $_GET ["type"];
+
+
+/*if(strcmp ( $say[0], "-") == 0 && strcmp ( $say[1], "-") == 0 && strcmp ( $say[2], "N") == 0 && strcmp ( $say[3], "U") == 0 && strcmp ( $say[4], "L") == 0
+&& strcmp ( $say[5], "L") == 0)
+{
+
+	print "cprint ^1 No input; echo ^1 No input";
+	return;
+}*/
+
 $possible_null_char = substr($say, 0,6);
-if(strcmp($possible_null_char, "--NULL") == 0)
+
+$possible_unique_number = substr($say, 0,11);
+if( (is_numeric($possible_unique_number) && $possible_unique_number == 94251635430) 
+|| strcmp($possible_null_char, "--NULL") == 0) // if string is a unique number or NULL
 {
 	print "cprint ^1 No input; echo ^1 No input";
 	return;
 }
 
-$type = $_GET["type"];
+$visibility = $_GET["visibility"];
 
 
-if($type == 1)
+if($visibility == 1)
 	print "say ";
-elseif($type == 2)
+elseif($visibility == 2)
 	print "say_team ";
+else
+	print "echo ";
+	
 $color_count = 1;
-
+//$is_increasing = 1;//color_count is increasing or decreasing
+$decimal_color_code = rand(1, 3094);//should be less than 4096
 $char = "A";//some garbage character other than white space
 $trimmed_char = "";
-
+$arbitrary_number = rand(0,50);
 $space = 0;
 $trimmed_char = TrimAlreadyExistingColorCodes($say);
+
+//place your color codes here, if you change the number of colors in each set then adjust the cases in colorify also
+$color_set = array(
+	 array('000', '222', '555', '777', '888', 'AAA', 'BBB', 'CCC', 'EEE'),//gray gradiant
+	 array('700', 'A10', 'E20', 'F21', 'F33', 'F76', 'F77', 'FAA', 'FEE'), //red gradiant
+	 array('020', '070', '0b0', '1f4', '3f6', '6f9', '8fa', 'bfd', 'dfe'), //green gradiant
+	 array('220', '450', '8a0', 'ae0', 'ef3', 'df5', 'df9', 'efb', 'dfd'), // yellow gradiant
+	 array('001', '108', '10c', '22f', '55f', '88f', 'bbf', 'ccf', 'eef'), //indigo gradiant
+	 array('011', '055', '0AB', '0DE', '1EF', '5EF', '7DF', 'ACF', 'EFF'), //cyan gradiant
+	 array('305', 'A0A', 'D0D', 'F2F', 'F4F', 'F7F', 'F9F', 'FBF', 'FEF'), //magenta - pink
+	 array('50F', '209', '05E', '080', 'EE0', 'B40', 'E10', '080', 'EE0'), //rainbow 
+	 array('210', '840', 'C60', 'E70', 'FA4', 'FD6', 'FE9', 'FEA', 'FFD'), //brownish gradiant
+	 array('000', '222', '555', '777', '888', 'AAA', 'BBB', 'CCC', 'EEE'), //gray gradiant
+);
+
+$color_code = ($chat_type < 0) ? $color_set[rand(0, count($color_set) - 1)]: $color_set[$chat_type];
+
+//var_dump( $chat_type);
 
 #Debug
 #print "--- $trimmed_char--- ";
 #debug
 $prev_char = "x";//some garbage value other than $
 $length = strlen($trimmed_char);
+
 for($i = 0; $i <$length; ++$i)
 {
-	$char = substr($trimmed_char, $i,1);
+	$char = substr($trimmed_char, $i, 1);
 	if(strcmp ( $char, " " ) == 0)
 	{
 		$space = 1;
 	}
 	
 	if($space == 0) {
-		$color_count = colorify($color_count);
+		 $color_count = colorify1($color_count);
+		//print " < $is_increasing, $color_count > ";//Debug
+		//print " < $is_increasing > ";//Debug
 	}
 	else
 	{
@@ -67,14 +107,17 @@ for($i = 0; $i <$length; ++$i)
 		}
 		else
 		{
+		//colorize?
 			print "$prev_char";
 			$prev_char = "x";
 		}
 	}
 
 	PrintSpecial($char);
-	
+		
+	//° ± ² ³ ´ µ ¶ · ¸ ¹ 
 }
+
 
 function TrimAlreadyExistingColorCodes($say){
 	$trimmed_char = " ";
@@ -146,7 +189,7 @@ function TrimAlreadyExistingColorCodes($say){
 				}
 			
 				$position_A = $position_B + 5;
-				$position_B =$stringlength;
+				$position_B = $stringlength;
 				$color_code_position = 0;
 			}
 				
@@ -157,72 +200,74 @@ function TrimAlreadyExistingColorCodes($say){
 	return $trimmed_char;
 }
 
-function colorify($color_count)
+
+function colorify1($color_count) 
 {
+		global $color_code;
 		switch ($color_count){
 			case 1 :
-					print "^x700";
-					++$color_count;
-					break;
+				print_r("^x$color_code[0]");
+				++$color_count;
+				break;
 			case 2 :
-				print "^xA10";
+				print_r("^x$color_code[1]");
 				++$color_count;
 				break;
 			case 3 :
-				print "^xE20";
+				print_r("^x$color_code[2]");
 				++$color_count;
 				break;
 			case 4 :
-				print "^xF21";
+				print_r("^x$color_code[3]");
 				++$color_count;
 				break;
-			case 5  :
-				print "^xF33";
+			case 5 :
+				print_r("^x$color_code[4]");
 				++$color_count;
 				break;
 			case 6 :
-				print "^xF76";
+				print_r("^x$color_code[5]");
 				++$color_count;
 				break;
 			case 7 :
-				print "^xF77";
+				print_r("^x$color_code[6]");
 				++$color_count;
 				break;
 			case 8 :
-				print "^xFAA";
+				print_r("^x$color_code[7]");
 				++$color_count;
 				break;
 			case 9 :
-				print "^xFEE";
+				print_r("^x$color_code[8]");
 				++$color_count;
 				break;
 			#reverse color
 			case 10 :#same as 8
-				print "^xFAA";
+				print_r("^x$color_code[7]");
 				++$color_count;
 				break;
 			case 11 :#same as 7
-				print "^xF77";
+				print_r("^x$color_code[6]");
 				++$color_count;
 				break;
 			case 12 :#same as 6
-				print "^xF76";
+				print_r("^x$color_code[5]");
 				++$color_count;
 				break;
 			case 13 :#same as 5
-				print "^xF33";
+				print_r("^x$color_code[4]");
 				++$color_count;
 				break;
 			case 14 :#same as 4
-				print "^xF21";
+				print_r("^x$color_code[3]");
 				++$color_count;
 				break;
 			case 15 :#same as 3
-				print "^xE20";
+				print_r("^x$color_code[2]");
 				++$color_count;
 				break;
 			case 16 :#same as 2
-				print "^xA10";
+				print_r("^x$color_code[1]");
 				$color_count = 1;
 				break;
 			default:
