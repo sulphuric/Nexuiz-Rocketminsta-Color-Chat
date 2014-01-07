@@ -2,6 +2,7 @@
 <?php
 //color chat script support for Nexuiz/Rocketminsta
 //created by NARKASUR aka H2SO4 on 2013/12/06
+//last updated 2014/01/07
 header('Content-type: text/plain');
 
 if(!isset($_GET ["say"]) || !isset($_GET ["visibility"]) || !isset($_GET["type"]))
